@@ -454,7 +454,7 @@ GLGE.Document.prototype.loadDocument=function(url,relativeto){
 					this.responseXML.getElementById=this.docObj.getElementById;
 					this.docObj.loaded(this.docurl,this.responseXML);
 				}else{ 
-					GLGE.error("Error loading Document: "+this.docurl+" status "+this.status);
+					alert("Error loading Document: "+this.docurl+" status "+this.status);
 				}
 			}
 		};
@@ -5775,6 +5775,10 @@ if(GLGE.Material){
 	GLGE.Material.prototype["addMaterialLayer"]=GLGE.Material.prototype.addMaterialLayer;
 	GLGE.Material.prototype["getLayers"]=GLGE.Material.prototype.getLayers;
 	GLGE.Material.prototype["addTexture"]=GLGE.Material.prototype.addTexture;
+}
+
+GLGE.error = function (x) {
+	alert(x)
 }
 }
 closure_export();
