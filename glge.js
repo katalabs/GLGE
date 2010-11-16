@@ -5540,6 +5540,11 @@ GLGE.Texture.prototype.setSrc=function(url){
 	return this;
 };
 
+var isPow2 = function(n) {
+    var log2 = Math.log(n)/Math.log(2);
+    return log2==parseInt(log2);
+}
+
 /**
 * Sets the textures image location
 * @private
@@ -5554,11 +5559,15 @@ GLGE.Texture.prototype.doTexture=function(gl){
 		gl.bindTexture(gl.TEXTURE_2D, this.glTexture);
 		gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE,this.image);
 		gl.generateMipmap(gl.TEXTURE_2D);
+        /*
         if (gl.getError()==gl.INVALID_OPERATION) {
             this.npot=true;
         }else {
             this.npot=false;
         }
+        */
+        this.npot = !(isPow2(this.image.width) && isPow2(this.image.height));
+//        console.log("TEX:", this, this.image.width, this.image.height, this.npot);
 		gl.bindTexture(gl.TEXTURE_2D, null);
 		this.state=2;
 	}
